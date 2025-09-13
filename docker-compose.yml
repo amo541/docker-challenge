@@ -1,0 +1,20 @@
+services:
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+
+  flask:
+    build:
+      context: .
+      dockerfile: DOCKERFILE
+    container_name: flask
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+
